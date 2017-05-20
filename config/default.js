@@ -11,7 +11,7 @@ module.exports = {
                 'url': process.env.REDIS_URL || 'redis://localhost:6379/15'
             }
         },
-        accessToken: '',
-        routePrefix: '/hdashboard'
+        accessToken: 's3cret',
+        routePrefix: ''
     }
 }

@@ -6,6 +6,6 @@ module.exports = {
             'servicePort': 5000,
         },
         accessToken: '',
-        routePrefix: '/hdashboard'
+        routePrefix: ''
     }
 }
