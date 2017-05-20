@@ -16,7 +16,7 @@ service.start(5000);
 
 const factory = new HydraServiceFactory(config.service);
 factory.init().then(factory => {
-    let prefix = config.service.routePrefix;
+    let prefix = config.service.routesPrefix;
     service.get(`${prefix}/srv`, require('./actions/all-srv')(factory.getHydra()));
     service.get(`${prefix}/srv/:service/routes`, require('./actions/srv-routes')(factory.getHydra()));
     service.get(`${prefix}/srv/:service/nodes`, require('./actions/srv-nodes')(factory.getHydra()));

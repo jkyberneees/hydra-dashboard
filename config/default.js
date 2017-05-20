@@ -12,6 +12,6 @@ module.exports = {
             }
         },
         accessToken: 's3cret',
-        routePrefix: ''
+        routesPrefix: ''
     }
 }
