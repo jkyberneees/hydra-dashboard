@@ -1,12 +1,14 @@
-module.exports = (factory, describe, it) => {
+module.exports = (hydra, describe, it) => {
     const expect = require("chai").expect;
     const request = require('supertest')('http://localhost:5000');
 
     describe('Hydra Cluster Dashboard', () => {
-        it('init', (done) => {
-            factory.on('service:ready', () => {
+        it('init', function (done) {
+            this.timeout(6000);
+
+            setTimeout(() => {
                 done();
-            });
+            }, 5000);
         });
 
         it('get all services', async() => {
@@ -24,16 +26,12 @@ module.exports = (factory, describe, it) => {
                 });
         });
 
-        it('get service nodes', function (done) {
-            this.timeout(6000);
-
-            setTimeout(() => {
-                request.get('/srv/hydra-dashboard/nodes').expect(200)
-                    .then(response => {
-                        expect(response.body.length > 0).to.equal(true);
-                        done();
-                    });
-            }, 5000);
+        it('get service nodes', (done) => {
+            request.get('/srv/hydra-dashboard/nodes').expect(200)
+                .then(response => {
+                    expect(response.body.length > 0).to.equal(true);
+                    done();
+                });
         });
     });
 }
