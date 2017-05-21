@@ -3,7 +3,7 @@ module.exports = {
         hydra: {
             'serviceName': process.env.SERVICE_NAME || 'hydra-dashboard',
             'serviceDescription': 'Hydra cluster dashboard application.',
-            'serviceIP': '127.0.0.1',
+            'serviceIP': 'localhost',
             'servicePort': 5000,
             'serviceType': 'restana',
             'serviceVersion': '1.0.0',
