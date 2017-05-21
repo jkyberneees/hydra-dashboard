@@ -1,5 +1,5 @@
 module.exports = (hydra) => {
-    return async(req, res) => {
-        res.send('OK');
+    return (req, res) => {
+        res.end();
     };
 }
