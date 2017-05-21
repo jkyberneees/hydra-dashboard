@@ -1,8 +1,12 @@
-const HydraServiceFactory = require('hydra-integration').HydraServiceFactory;
+const HydraIntegrationPlugin = require('hydra-integration').HydraIntegrationPlugin;
+const HydraHttpPlugin = require('hydra-plugin-http').HydraHttpPlugin;
 const config = require('config');
+const hydra = require('hydra');
+
+hydra.use(new HydraIntegrationPlugin());
+hydra.use(new HydraHttpPlugin());
+
 const service = require('restana')();
-
-
 service.use((req, res, next) => {
     let token = req.headers['authorization'] || '';
     if (!token.endsWith(config.service.accessToken || '')) {
@@ -12,21 +16,23 @@ service.use((req, res, next) => {
 
     next();
 });
+let prefix = config.service.routesPrefix;
+service.get(`/_health`, require('./actions/health')(hydra));
+service.get(`${prefix}/srv`, require('./actions/all-srv')(hydra));
+service.get(`${prefix}/srv/:service/routes`, require('./actions/srv-routes')(hydra));
+service.get(`${prefix}/srv/:service/nodes`, require('./actions/srv-nodes')(hydra));
+service.get(`/*`, require('./actions/proxy-router')(hydra, config));
 service.start(5000);
 
-const factory = new HydraServiceFactory(config.service);
-factory.init().then(factory => {
-    let prefix = config.service.routesPrefix;
-    service.get(`${prefix}/srv`, require('./actions/all-srv')(factory.getHydra()));
-    service.get(`${prefix}/srv/:service/routes`, require('./actions/srv-routes')(factory.getHydra()));
-    service.get(`${prefix}/srv/:service/nodes`, require('./actions/srv-nodes')(factory.getHydra()));
-
-    factory.sync(service);
-});
+(async() => {
+    await hydra.init(config.service);
+    await hydra.registerService();
+    await hydra.integration.sync(service);
+})();
 
 
 
 // supporting tests coverage
 if (process.env.NODE_ENV === 'testing') {
-    require('./tests')(factory, describe, it);
+    require('./tests')(hydra, describe, it);
 }
