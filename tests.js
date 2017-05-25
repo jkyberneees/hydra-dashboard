@@ -26,8 +26,16 @@ module.exports = (hydra, describe, it) => {
                 });
         });
 
-        it('get service nodes', (done) => {
-            request.get('/srv/hydra-dashboard/nodes').expect(200)
+        it('get service health', (done) => {
+            request.get('/srv/hydra-dashboard/health').expect(200)
+                .then(response => {
+                    expect(response.body.length > 0).to.equal(true);
+                    done();
+                });
+        });
+
+        it('get nodes', (done) => {
+            request.get('/node').expect(200)
                 .then(response => {
                     expect(response.body.length > 0).to.equal(true);
                     done();
