@@ -70,7 +70,7 @@ Host: localhost:5000
 ### List cluster nodes
 `[GET]/node`
 ```bash
-GET /srv/hydra-dashboard/node HTTP/1.1
+GET /node HTTP/1.1
 Host: localhost:5000
 ```
 ```json
