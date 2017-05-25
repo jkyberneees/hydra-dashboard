@@ -5,7 +5,8 @@ Hydra cluster dashboard application.
 ```bash
   [GET]/srv/:service/routes
   [GET]/srv
-  [GET]/srv/:service/nodes
+  [GET]/srv/:service/health
+  [GET]/node
 ```
 
 ### List all services
