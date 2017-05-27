@@ -18,10 +18,10 @@ service.use((req, res, next) => {
 });
 let prefix = config.service.routesPrefix;
 service.get(`/_health`, require('./actions/health')(hydra));
-service.get(`${prefix}/srv`, require('./actions/all-srv')(hydra));
-service.get(`${prefix}/srv/:service/routes`, require('./actions/srv-routes')(hydra));
-service.get(`${prefix}/srv/:service/health`, require('./actions/srv-health')(hydra));
-service.get(`${prefix}/node`, require('./actions/all-node')(hydra));
+service.get(`${prefix}/srvs`, require('./actions/all-srv')(hydra));
+service.get(`${prefix}/srvs/:service/routes`, require('./actions/srv-routes')(hydra));
+service.get(`${prefix}/srvs/:service/health`, require('./actions/srv-health')(hydra));
+service.get(`${prefix}/nodes`, require('./actions/all-node')(hydra));
 service.get(`/*`, require('./actions/proxy-router')(hydra, config));
 service.start(5000);
 

@@ -12,7 +12,7 @@ module.exports = (hydra, describe, it) => {
         });
 
         it('get all services', async() => {
-            await request.get('/srv').expect(200)
+            await request.get('/srvs').expect(200)
                 .then(response => {
                     let srv = response.body.filter((e) => e.serviceName === "hydra-dashboard")[0];
                     expect(srv.available).to.equal(true);
@@ -20,14 +20,14 @@ module.exports = (hydra, describe, it) => {
         });
 
         it('get service routes', async() => {
-            await request.get('/srv/hydra-dashboard/routes').expect(200)
+            await request.get('/srvs/hydra-dashboard/routes').expect(200)
                 .then(response => {
-                    expect(response.body.includes('[GET]/srv/:service/routes')).to.equal(true);
+                    expect(response.body.includes('[GET]/srvs/:service/routes')).to.equal(true);
                 });
         });
 
         it('get service health', (done) => {
-            request.get('/srv/hydra-dashboard/health').expect(200)
+            request.get('/srvs/hydra-dashboard/health').expect(200)
                 .then(response => {
                     expect(response.body.length > 0).to.equal(true);
                     done();
@@ -35,7 +35,7 @@ module.exports = (hydra, describe, it) => {
         });
 
         it('get nodes', (done) => {
-            request.get('/node').expect(200)
+            request.get('/nodes').expect(200)
                 .then(response => {
                     expect(response.body.length > 0).to.equal(true);
                     done();

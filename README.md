@@ -3,18 +3,14 @@ Hydra cluster dashboard application.
 
 ## Usage
 ```bash
-  [GET]/srv/:service/routes
-  [GET]/srv
-  [GET]/srv/:service/health
-  [GET]/node
+  [GET]/srvs/:service/routes
+  [GET]/srvs
+  [GET]/srvs/:service/health
+  [GET]/nodes
 ```
 
 ### List all services
-`[GET]/srv`
-```bash
-GET /srv HTTP/1.1
-Host: localhost:5000
-```
+`[GET]/srvs`
 ```json
 [
     {
@@ -26,26 +22,18 @@ Host: localhost:5000
 ```
 
 ### List service routes
-`[GET]/srv/:service/routes`
-```bash
-GET /srv/hydra-dashboard/routes HTTP/1.1
-Host: localhost:5000
-```
+`[GET]/srvs/:service/routes`
 ```json
 [
-  "[GET]/srv/:service/routes",
-  "[GET]/srv",
-  "[GET]/srv/:service/health",
-  "[GET]/node"
+  "[GET]/srvs/:service/routes",
+  "[GET]/srvs",
+  "[GET]/srvs/:service/health",
+  "[GET]/nodes"
 ]
 ```
 
 ### List service health entries
-`[GET]/srv/:service/health`
-```bash
-GET /srv/hydra-dashboard/health HTTP/1.1
-Host: localhost:5000
-```
+`[GET]/srvs/:service/health`
 ```json
 [
   {
@@ -69,11 +57,7 @@ Host: localhost:5000
 ```
 
 ### List cluster nodes
-`[GET]/node`
-```bash
-GET /node HTTP/1.1
-Host: localhost:5000
-```
+`[GET]/nodes`
 ```json
 [
   {
