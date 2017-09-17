@@ -1,5 +1,5 @@
 # hydra-dashboard
-Hydra cluster dashboard application.
+Hydra cluster dashboard/router application.
 
 ## Usage
 ```bash
