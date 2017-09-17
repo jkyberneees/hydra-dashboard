@@ -1,13 +1,13 @@
-module.exports = (hydra) => {
-    return async(req, res) => {
-        let srvs = await hydra.getServices();
-        let tasks = [];
-        for (let srv of srvs) {
-            tasks.push((async() => srv.available = await hydra.hasServicePresence(srv.serviceName))());
-            delete srv.registeredOn;
-        }
-        await Promise.all(tasks);
+/* eslint no-restricted-syntax:0, no-return-assign:0, no-param-reassign:0 */
 
-        res.send(srvs);
-    };
-}
+module.exports = hydra => async (req, res) => {
+  const srvs = await hydra.getServices();
+  const tasks = [];
+  srvs.forEach((srv) => {
+    tasks.push((async () => (srv.available = await hydra.hasServicePresence(srv.serviceName)))());
+    delete srv.registeredOn;
+  });
+  await Promise.all(tasks);
+
+  res.send(srvs);
+};

@@ -1,5 +1,3 @@
-module.exports = (hydra) => {
-    return (req, res) => {
-        res.end();
-    };
-}
+module.exports = () => (req, res) => {
+  res.end();
+};
