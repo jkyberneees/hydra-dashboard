@@ -1,6 +1,6 @@
 {
   "name": "hydra-dashboard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hydra cluster dashboard/router application.",
   "main": "index.js",
   "scripts": {
@@ -21,8 +21,8 @@
   "dependencies": {
     "config": "^1.26.2",
     "hydra": "^1.4.18",
-    "hydra-integration": "0.*",
-    "hydra-plugin-http": "0.*",
+    "hydra-integration": "1.*",
+    "hydra-plugin-http": "1.*",
     "restana": "0.*"
   },
   "devDependencies": {
