@@ -14,8 +14,14 @@ module.exports = {
       },
       plugins: {
         'hydra-plugin-http': {
-          // the plugin can be configured in this point or using the constructor
-          lb: {},
+          lb: {
+            strategy: {
+              name: 'race', // last-presence
+              timeout: 3000,
+              nodes: 3,
+              healthPath: '_health',
+            },
+          },
           proxy: {
             routesCache: SERVICE_NAME === 'hydra-router', // routes caching only supported if service name is 'hydra-router'
           },
