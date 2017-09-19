@@ -16,7 +16,7 @@ module.exports = {
         'hydra-plugin-http': {
           lb: {
             strategy: {
-              name: 'race', // last-presence
+              name: 'race', // available strategies: race, last-presence
               timeout: 3000,
               nodes: 3,
               healthPath: '_health',
