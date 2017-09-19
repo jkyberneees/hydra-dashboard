@@ -7,6 +7,7 @@ Hydra cluster dashboard/router application.
   [GET]/srvs
   [GET]/srvs/:service/health
   [GET]/nodes
+  [GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS]/*
 ```
 
 ### List all services
@@ -72,4 +73,14 @@ Hydra cluster dashboard/router application.
     "elapsed": 0
   }
 ]
+```
+
+### REST query any of your connected services
+
+The `hydra-dashboard` application also acts as a proxy/router for all your connected services. This means that you can request through it any of your HTTP endpoints.  
+
+For example:
+```bash
+[GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS] http://api-dashboard.example.com/some-service-endpoint
+[GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS] http://api-dashboard.example.com/[service-name]/endpoint
 ```
