@@ -3,6 +3,11 @@ Hydra cluster dashboard/router application.
 
 ## Usage
 ```bash
+npm start
+```
+
+HTTP endpoints:
+```bash
   [GET]/srvs/:service/routes
   [GET]/srvs
   [GET]/srvs/:service/health
@@ -83,4 +88,9 @@ For example:
 ```bash
 [GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS] http://api-dashboard.example.com/some-service-endpoint
 [GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS] http://api-dashboard.example.com/[service-name]/endpoint
+```
+
+## Tests
+```bash
+npm test
 ```
