@@ -88,6 +88,7 @@ For example:
 ```bash
 [GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS] http://api-dashboard.example.com/:endpoint
 [GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS] http://api-dashboard.example.com/[:service-name]/:endpoint
+```
 
 ## Tests
 ```bash
