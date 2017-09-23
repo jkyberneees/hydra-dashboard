@@ -86,9 +86,8 @@ The `hydra-dashboard` application also acts as a proxy/router for all your conne
 
 For example:
 ```bash
-[GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS] http://api-dashboard.example.com/some-service-endpoint
-[GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS] http://api-dashboard.example.com/[service-name]/endpoint
-```
+[GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS] http://api-dashboard.example.com/:endpoint
+[GET|DELETE|POST|HEAD|PUT|PATCH|OPTIONS] http://api-dashboard.example.com/[:service-name]/:endpoint
 
 ## Tests
 ```bash
