@@ -1,16 +1,16 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 
-const uuid = require('uuid');
 const httpProxy = require('http-proxy');
 
-module.exports = (hydra, config) => {
+module.exports = (hydra, config, pipeline) => {
   const proxy = httpProxy.createProxyServer(config.proxy || {});
-  proxy.on('proxyReq', (proxyReq) => {
-    if (!proxyReq.getHeader('x-request-id')) proxyReq.setHeader('X-Request-ID', uuid.v4());
+  proxy.on('proxyRes', (proxyRes, req, res) => {
+    pipeline.processResponse(proxyRes, req, res);
   });
 
   return async (req, res) => {
     try {
+      await pipeline.processRequest(req, res);
       proxy.web(req, res, {
         target: await hydra.http.proxy.translate(req, true),
       });

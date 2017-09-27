@@ -5,6 +5,7 @@ const HydraHttpPlugin = require('hydra-plugin-http').HydraHttpPlugin;
 const config = require('config');
 const hydra = require('hydra');
 const service = require('restana')();
+const pipeline = require('./lib/pipeline');
 
 hydra.use(new HydraIntegrationPlugin());
 hydra.use(new HydraHttpPlugin());
@@ -26,7 +27,7 @@ service.get(`${prefix}/srvs/:service/routes`, require('./actions/srv-routes')(hy
 service.get(`${prefix}/srvs/:service/health`, require('./actions/srv-health')(hydra));
 service.get(`${prefix}/nodes`, require('./actions/all-node')(hydra));
 
-const proxy = require('./actions/proxy-router')(hydra, config);
+const proxy = require('./actions/proxy-router')(hydra, config, pipeline);
 
 service.get('/*', proxy);
 service.post('/*', proxy);
