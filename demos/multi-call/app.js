@@ -1,17 +1,20 @@
 /* eslint import/no-extraneous-dependencies:0, no-unused-vars:0, no-console:0 */
 const Koa = require('koa');
+const KoaRouter = require('koa-router');
 const hydra = require('hydra');
-const HydraHttpPlugin = require('hydra-plugin-http').HydraHttpPlugin;
-
-hydra.use(new HydraHttpPlugin());
+const axios = require('axios');
 
 const HOSTNAME = process.env.HOSTNAME || '127.0.0.1';
 const PORT = process.env.PORT || 3003;
 
 const service = new Koa();
-const router = require('koa-router')();
+const router = KoaRouter();
 
-router.post('/complex', async (ctx) => {
+const gateway = axios.create({
+  baseURL: 'http://localhost:5000',
+});
+
+router.get('/complex', async (ctx) => {
   const options = {
     headers: {
       'x-request-id': ctx.headers['x-request-id'],
@@ -19,9 +22,9 @@ router.post('/complex', async (ctx) => {
   };
   const responses = [];
 
-  responses.push((await hydra.http.request.post('/v1/login', {}, options)).data);
-  responses.push((await hydra.http.request.get('/v1/notes', options)).data);
-  responses.push((await hydra.http.request.post('/v1/sendemail', {}, options)).data);
+  responses.push((await gateway.post('/v1/login', {}, options)).data);
+  responses.push((await gateway.get('/v1/notes', options)).data);
+  responses.push((await gateway.post('/v1/sendemail', {}, options)).data);
 
   ctx.body = responses;
   ctx.status = 200;
