@@ -1,13 +1,11 @@
-/* eslint no-restricted-syntax:0, no-return-assign:0, no-param-reassign:0 */
-
 module.exports = hydra => async (req, res) => {
-  const srvs = await hydra.getServices();
-  const tasks = [];
+  const srvs = await hydra.getServices()
+  const tasks = []
   srvs.forEach((srv) => {
-    tasks.push((async () => (srv.available = await hydra.hasServicePresence(srv.serviceName)))());
-    delete srv.registeredOn;
-  });
-  await Promise.all(tasks);
+    tasks.push((async () => (srv.available = await hydra.hasServicePresence(srv.serviceName)))())
+    delete srv.registeredOn
+  })
+  await Promise.all(tasks)
 
-  res.send(srvs);
-};
+  res.send(srvs)
+}

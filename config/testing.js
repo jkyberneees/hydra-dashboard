@@ -3,9 +3,9 @@ module.exports = {
     hydra: {
       serviceName: 'hydra-dashboard',
       serviceIP: 'localhost',
-      servicePort: 5000,
+      servicePort: 5000
     },
     accessToken: '',
-    routePrefix: '',
-  },
-};
+    routePrefix: ''
+  }
+}
