@@ -26,14 +26,7 @@ service.get(`${prefix}/srvs/:service/health`, require('./actions/srv-health')(hy
 service.get(`${prefix}/nodes`, require('./actions/all-node')(hydra))
 
 const proxy = require('./actions/proxy-router')(hydra, config, pipeline)
-
-service.get('/*', proxy)
-service.post('/*', proxy)
-service.delete('/*', proxy)
-service.options('/*', proxy)
-service.head('/*', proxy)
-service.patch('/*', proxy)
-service.put('/*', proxy);
+service.all('/*', proxy);
 
 (async () => {
   await service.start(config.service.hydra.servicePort)
